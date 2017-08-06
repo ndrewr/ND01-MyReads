@@ -29,6 +29,16 @@ const Book = ({ classes, title }) =>
 
 const StyledBook = withStyles(styleSheet)(Book);
 
+const ItemShelf = ({ items }) =>
+  <Grid container>
+    {items.map((book, index) =>
+      <StyledBook key={book.title + index} title={book.title} />
+    )}
+  </Grid>;
+
+const EmptyShelf = () =>
+  <Typography type="display1">Add books to this list!</Typography>;
+
 function Shelf({ classes, items, label }) {
   return (
     <div className={classes.root}>
@@ -39,11 +49,7 @@ function Shelf({ classes, items, label }) {
         <hr />
         <Grid container gutter={24}>
           <Grid item xs={12}>
-            <Grid container>
-              {items.map((book, index) =>
-                <StyledBook key={book.title + index} title={book.title} />
-              )}
-            </Grid>
+            {items.length ? <ItemShelf items={items} /> : <EmptyShelf />}
           </Grid>
         </Grid>
       </Paper>

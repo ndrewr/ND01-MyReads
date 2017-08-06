@@ -17,8 +17,6 @@ import Shelf from '../modules/Shelf';
 //   { title: 'Goldfinger' }
 // ];
 
-// const shelves = ['Currently Reading', 'Want to Read', 'Finished Reading'];
-
 const shelves = {
   wantToRead: 'Want to Read',
   currentlyReading: 'Currently Reading',
@@ -29,13 +27,6 @@ class HomePage extends Component {
   state = {
     books: []
   };
-
-  // constructor() {
-  //   super();
-  // this.state = {
-  //   books: books // TODO: remove dummy data
-  // };
-  // }
 
   async fetchBooks() {
     const books = await BooksAPI.getAll();
