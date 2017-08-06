@@ -2,60 +2,44 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 
+import Book from './Book';
+
 const styleSheet = createStyleSheet(theme => ({
   root: {
     flexGrow: 1,
     marginTop: 30
-  },
-  book: {
-    padding: 16,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-    height: 300
   }
 }));
 
-const Book = ({ classes, title }) =>
-  <Grid item xs={12} sm={6} md={3} lg={4}>
-    <Paper className={classes.book}>
-      {title}
-    </Paper>
+const ItemShelf = ({ classes, items }) =>
+  <Grid container className={classes.root} justify="center" spacing={24}>
+    {items.map((book, index) => <Book key={book.title + index} book={book} />)}
   </Grid>;
 
-const StyledBook = withStyles(styleSheet)(Book);
-
-const ItemShelf = ({ items }) =>
-  <Grid container>
-    {items.map((book, index) =>
-      <StyledBook key={book.title + index} title={book.title} />
-    )}
-  </Grid>;
+const StyledShelf = withStyles(styleSheet)(ItemShelf);
 
 const EmptyShelf = () =>
   <Typography type="display1">Add books to this list!</Typography>;
 
-function Shelf({ classes, items, label }) {
+const Shelf = ({ classes, items, label }) => {
   return (
-    <div className={classes.root}>
-      <Paper>
+    <Grid container>
+      <Grid item xs={12}>
         <Typography type="display2" color="inherit">
           {label}
         </Typography>
         <hr />
-        <Grid container gutter={24}>
-          <Grid item xs={12}>
-            {items.length ? <ItemShelf items={items} /> : <EmptyShelf />}
-          </Grid>
-        </Grid>
-      </Paper>
-    </div>
+        {items.length ? <StyledShelf items={items} /> : <EmptyShelf />}
+      </Grid>
+    </Grid>
   );
-}
+};
 
 Shelf.propTypes = {
   classes: PropTypes.object,
