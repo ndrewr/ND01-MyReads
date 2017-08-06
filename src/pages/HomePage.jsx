@@ -10,27 +10,41 @@ import Typography from 'material-ui/Typography';
 
 import Shelf from '../modules/Shelf';
 
-const books = [
-  { title: 'Moby Dick' },
-  { title: 'Wuthering Heights' },
-  { title: 'Freakonomics' },
-  { title: 'Goldfinger' }
-];
+// const books = [
+//   { title: 'Moby Dick' },
+//   { title: 'Wuthering Heights' },
+//   { title: 'Freakonomics' },
+//   { title: 'Goldfinger' }
+// ];
 
-const shelves = ['Currently Reading', 'Want to Read', 'Finished Reading'];
+// const shelves = ['Currently Reading', 'Want to Read', 'Finished Reading'];
+
+const shelves = {
+  wantToRead: 'Want to Read',
+  currentlyReading: 'Currently Reading',
+  read: 'Read'
+};
 
 class HomePage extends Component {
-  constructor() {
-    super();
-    this.state = {
-      books: books // TODO: remove dummy data
-    };
-  }
+  state = {
+    books: []
+  };
 
-  async componentDidMount() {
+  // constructor() {
+  //   super();
+  // this.state = {
+  //   books: books // TODO: remove dummy data
+  // };
+  // }
+
+  async fetchBooks() {
     const books = await BooksAPI.getAll();
     console.log('book collection is...', books);
     this.setState({ books });
+  }
+
+  componentDidMount() {
+    this.fetchBooks();
   }
 
   render() {
@@ -42,8 +56,13 @@ class HomePage extends Component {
           <Typography type="display4" color="inherit">
             Home.
           </Typography>
-          {shelves.map(shelfName =>
-            <Shelf key={shelfName} items={books} label={shelfName} />
+          {Object.keys(shelves).map(shelfKey =>
+            <Shelf
+              key={shelfKey}
+              items={books.filter(book => book.shelf === shelfKey)}
+              label={shelves[shelfKey]}
+              type={shelfKey}
+            />
           )}
         </Grid>
       </Grid>
