@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles, createStyleSheet } from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
+// import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 
@@ -17,9 +17,11 @@ const styleSheet = createStyleSheet(theme => ({
   }
 }));
 
-const ItemShelf = ({ classes, items }) =>
+const ItemShelf = ({ classes, items, onChange }) =>
   <Grid container className={classes.root} justify="center" spacing={24}>
-    {items.map((book, index) => <Book key={book.title + index} book={book} />)}
+    {items.map((book, index) =>
+      <Book key={book.title + index} book={book} onChange={onChange} />
+    )}
   </Grid>;
 
 const StyledShelf = withStyles(styleSheet)(ItemShelf);
@@ -27,7 +29,7 @@ const StyledShelf = withStyles(styleSheet)(ItemShelf);
 const EmptyShelf = () =>
   <Typography type="display1">Add books to this list!</Typography>;
 
-const Shelf = ({ classes, items, label }) => {
+const Shelf = ({ classes, items, label, type, onChange }) => {
   return (
     <Grid container>
       <Grid item xs={12}>
@@ -35,7 +37,9 @@ const Shelf = ({ classes, items, label }) => {
           {label}
         </Typography>
         <hr />
-        {items.length ? <StyledShelf items={items} /> : <EmptyShelf />}
+        {items.length
+          ? <StyledShelf items={items} onChange={onChange} />
+          : <EmptyShelf />}
       </Grid>
     </Grid>
   );
@@ -43,7 +47,9 @@ const Shelf = ({ classes, items, label }) => {
 
 Shelf.propTypes = {
   classes: PropTypes.object,
-  items: PropTypes.array
+  items: PropTypes.array,
+  type: PropTypes.string,
+  onChange: PropTypes.func
 };
 
 export default withStyles(styleSheet)(Shelf);

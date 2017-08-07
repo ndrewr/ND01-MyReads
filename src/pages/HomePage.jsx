@@ -34,6 +34,25 @@ class HomePage extends Component {
     this.setState({ books });
   }
 
+  changeShelf = (targetBook: any, shelfType: string) => {
+    console.log('hi', targetBook, shelfType);
+    BooksAPI.update(targetBook, shelfType).then(response => {
+      // response is an object with three arrays, one for each shelf
+      console.log('updated! ', response);
+      // this.setState({ books: response })
+      const books = this.state.books.slice();
+      const targetBookIndex = books.findIndex(
+        book => book.id === targetBook.id
+      );
+      // const targetBook = books[targetBookIndex];
+      console.log('target book...', targetBook);
+      books[targetBookIndex] = Object.assign({}, targetBook, {
+        shelf: shelfType
+      });
+      this.setState({ books });
+    });
+  };
+
   componentDidMount() {
     this.fetchBooks();
   }
@@ -53,6 +72,7 @@ class HomePage extends Component {
               items={books.filter(book => book.shelf === shelfKey)}
               label={shelves[shelfKey]}
               type={shelfKey}
+              onChange={this.changeShelf}
             />
           )}
         </Grid>
