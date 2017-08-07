@@ -1,9 +1,10 @@
+// @flow
+
 import React from 'react';
 import { Route } from 'react-router-dom';
 // import { withStyles, createStyleSheet } from 'material-ui/styles';
 
 import Grid from 'material-ui/Grid';
-// import Paper from 'material-ui/Paper';
 
 import HomePage from '../pages/HomePage';
 import SearchPage from '../pages/SearchPage';

@@ -2,25 +2,17 @@
 
 import React, { Component } from 'react';
 
-import { withStyles, createStyleSheet } from 'material-ui/styles';
-// import Paper from 'material-ui/Paper';
-import Grid from 'material-ui/Grid';
-// import Typography from 'material-ui/Typography';
-
-import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
 import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
+import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
+import Grid from 'material-ui/Grid';
 import Menu, { MenuItem } from 'material-ui/Menu';
+import Typography from 'material-ui/Typography';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 
-type BookItem = {
-  title: string,
-  description: string,
-  imageLinks: {
-    thumbnail: string,
-    smallThumbnail: string
-  },
-  authors: Array<string>,
-  shelf: string
+const shelves = {
+  wantToRead: 'Want to Read',
+  currentlyReading: 'Currently Reading',
+  read: 'Read'
 };
 
 const styleSheet = createStyleSheet({
@@ -54,8 +46,9 @@ class Book extends Component {
     const { book, onChange } = this.props;
 
     return () => {
-      console.log('clicked on menu item!');
-      onChange(book, shelfType);
+      if (shelfType !== book.shelf) {
+        onChange(book, shelfType);
+      }
       this.handleMenuClose();
     };
   };
@@ -110,24 +103,15 @@ class Book extends Component {
           open={this.state.showOptions}
           onRequestClose={this.handleMenuClose}
         >
-          <MenuItem
-            selected={'currentlyReading' === shelf}
-            onClick={this.handleClick('currentlyReading')}
-          >
-            Currently Reading
-          </MenuItem>
-          <MenuItem
-            selected={'wantToRead' === shelf}
-            onClick={this.handleClick('wantToRead')}
-          >
-            Want to Read
-          </MenuItem>
-          <MenuItem
-            selected={'read' === shelf}
-            onClick={this.handleClick('read')}
-          >
-            Read
-          </MenuItem>
+          {Object.keys(shelves).map(shelfType =>
+            <MenuItem
+              key={shelfType}
+              selected={shelfType === shelf}
+              onClick={this.handleClick(shelfType)}
+            >
+              {shelves[shelfType]}
+            </MenuItem>
+          )}
         </Menu>
       </Grid>
     );
