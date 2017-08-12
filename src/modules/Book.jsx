@@ -10,8 +10,8 @@ import Typography from 'material-ui/Typography';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 
 const shelves = {
-  wantToRead: 'Want to Read',
   currentlyReading: 'Currently Reading',
+  wantToRead: 'Want to Read',
   read: 'Read'
 };
 

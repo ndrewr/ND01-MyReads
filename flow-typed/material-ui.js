@@ -23,6 +23,10 @@ declare module 'material-ui/Paper' {
    declare var exports: any;
 }
 
+declare module 'material-ui/TextField' {
+   declare var exports: any;
+}
+
 declare module 'material-ui/Toolbar' {
    declare var exports: any;
 }

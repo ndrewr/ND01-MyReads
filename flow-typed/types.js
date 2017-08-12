@@ -6,5 +6,6 @@ declare type BookItem = {
     smallThumbnail: string
   },
   authors: Array<string>,
-  shelf: string
+  shelf: string,
+  id: string
 };

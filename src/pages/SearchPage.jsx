@@ -19,15 +19,25 @@ const styleSheet = createStyleSheet(theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit
-    // width: 200,
   }
 }));
 
 class SearchPage extends Component {
   state = {
-    books: [],
-    value: ''
+    bookResults: [],
+    query: ''
   };
+
+  props: {
+    books: Array<BookItem>,
+    classes: any,
+    update: (Array<BookItem>) => void
+  };
+
+  // constructor(props) {
+  //   super(props)
+  //   this.searchBooks = this.searchBooks.bind(this)
+  // }
 
   assignToShelf = (targetBook: any, shelfType: string) => {
     console.log('assign this book to a shelf!');
@@ -43,26 +53,41 @@ class SearchPage extends Component {
     // });
   };
 
-  searchBooks = event => {
-    // api returns Array of bookitems if successful, else an object with error and empty items array
-    console.log('searchinnn ', event.target, event.target.value);
-    const query = event.target.value;
-    this.setState({ value: query });
-    BooksAPI.search(query, 20).then(results => {
-      if (results.error) {
-        console.log('uh-oh?');
-        this.setState({ books: [] });
-        return;
-      }
-      console.log('here are the results: ', results);
-      this.setState({ books: results });
-    });
+  prepareResults = async results => {
+    const bookList = await BooksAPI.getAll();
+
+    // this.props.update(results);
+    this.setState({ bookResults: results });
+  };
+
+  searchBooks = async event => {
+    const query: string = event.target.value;
+    this.setState({ query });
+
+    const MAX_RESULTS = 20;
+    let results;
+
+    try {
+      results = await BooksAPI.search(query, MAX_RESULTS);
+    } catch (error) {
+      console.log('There were problems fetching book results: ', error);
+    }
+
+    console.log('here are the results: ', results);
+
+    if (!results || results.error) {
+      this.setState({ bookResults: [] });
+      return;
+    }
+
+    // this.setState({ query, books: results });
+    this.prepareResults(results);
   };
 
   render() {
-    const { books, value } = this.state;
-
-    const { classes } = this.props;
+    const { bookResults, query } = this.state;
+    const { books, classes, update } = this.props;
+    // const { classes } = this.props;
 
     return (
       <Grid container>
@@ -78,11 +103,11 @@ class SearchPage extends Component {
             fullWidth
             autoFocus
             onChange={this.searchBooks}
-            value={value}
+            value={query}
           />
           {books.length
             ? <Shelf
-                items={books}
+                items={bookResults}
                 label="results:"
                 onChange={this.assignToShelf}
               />

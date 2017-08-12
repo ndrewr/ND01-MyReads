@@ -11,41 +11,49 @@ import Typography from 'material-ui/Typography';
 import Shelf from '../modules/Shelf';
 
 const shelves = {
-  wantToRead: 'Want to Read',
   currentlyReading: 'Currently Reading',
+  wantToRead: 'Want to Read',
   read: 'Read'
 };
 
 class HomePage extends Component {
-  state = {
-    books: []
+  // state = {
+  //   books: []
+  // };
+  props: {
+    books: Array<BookItem>,
+    update: (Array<BookItem>) => mixed
   };
 
-  async fetchBooks() {
-    const books = await BooksAPI.getAll();
-    console.log('book collection is...', books);
-    this.setState({ books });
-  }
+  // async fetchBooks() {
+  //   const books = await BooksAPI.getAll();
+  //   console.log('book collection is...', books);
+  //   this.setState({ books });
+  // }
 
   changeShelf = (targetBook: any, shelfType: string) => {
     BooksAPI.update(targetBook, shelfType).then(response => {
-      const books = this.state.books.slice();
+      // const books = this.state.books.slice();
+      const books: Array<BookItem> = this.props.books.slice();
+
       const targetBookIndex = books.findIndex(
         book => book.id === targetBook.id
       );
       books[targetBookIndex] = Object.assign({}, targetBook, {
         shelf: shelfType
       });
-      this.setState({ books });
+      // this.setState({ books });
+      this.props.update(books);
     });
   };
 
-  componentDidMount() {
-    this.fetchBooks();
-  }
+  // componentDidMount() {
+  //   this.fetchBooks();
+  // }
 
   render() {
-    const { books } = this.state;
+    // const { books } = this.state;
+    const { books } = this.props;
 
     return (
       <Grid container>
