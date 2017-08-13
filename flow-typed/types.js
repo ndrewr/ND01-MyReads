@@ -9,3 +9,8 @@ declare type BookItem = {
   shelf: string,
   id: string
 };
+
+declare type BooksApiError = {
+  error: string,
+  items: Array<any>
+}

@@ -31,73 +31,60 @@ class SearchPage extends Component {
   props: {
     books: Array<BookItem>,
     classes: any,
-    // updateList: (Array<BookItem>) => void
     updateItem: (BookItem, string) => void
   };
 
-  // constructor(props) {
-  //   super(props)
-  //   this.searchBooks = this.searchBooks.bind(this)
-  // }
-
   assignToShelf = (targetBook: any, shelfType: string) => {
-    console.log('assign this book to a shelf!');
-
-    // BooksAPI.update(targetBook, shelfType)
-    // .then(response => {
-    const books = this.state.bookResults.slice();
-    const targetBookIndex = books.findIndex(book => book.id === targetBook.id);
+    const books: Array<BookItem> = this.state.bookResults.slice();
+    const targetBookIndex: number = books.findIndex(
+      book => book.id === targetBook.id
+    );
     books[targetBookIndex] = Object.assign({}, targetBook, {
       shelf: shelfType
     });
+
     this.setState({ bookResults: books });
-    // });
 
     this.props.updateItem(targetBook, shelfType);
   };
 
-  prepareResults = async results => {
-    // const currentBookList = await BooksAPI.getAll();
-    const currentBookList = this.props.books;
-
-    const currentBookIds = currentBookList.map(book => book.id);
-    const preparedResults = results.map(resultBook => {
+  prepareResults = async (results: Array<BookItem>) => {
+    const currentBookList: Array<BookItem> = this.props.books;
+    const currentBookIds: Array<string> = currentBookList.map(book => book.id);
+    const preparedResults: Array<BookItem> = results.map(resultBook => {
       const matchId = currentBookIds.indexOf(resultBook.id);
       return matchId >= 0 ? currentBookList[matchId] : resultBook;
     });
 
-    // this.props.update(results);
     this.setState({ bookResults: preparedResults });
   };
 
   searchBooks = async event => {
+    let results: Array<BookItem> | BooksApiError = [];
+    const MAX_RESULTS = 20;
     const query: string = event.target.value;
+
     this.setState({ query });
 
-    const MAX_RESULTS = 20;
-    let results;
-
-    try {
-      results = await BooksAPI.search(query, MAX_RESULTS);
-    } catch (error) {
-      console.log('There were problems fetching book results: ', error);
+    if (query) {
+      try {
+        results = await BooksAPI.search(query, MAX_RESULTS);
+      } catch (error) {
+        console.log('There were problems fetching book results: ', error);
+      }
     }
 
-    console.log('here are the results: ', results);
-
-    if (!results || results.error) {
+    if (!Array.isArray(results)) {
       this.setState({ bookResults: [] });
       return;
     }
 
-    // this.setState({ query, books: results });
     this.prepareResults(results);
   };
 
   render() {
     const { bookResults, query } = this.state;
-    const { books, classes, update } = this.props;
-    // const { classes } = this.props;
+    const { books, classes } = this.props;
 
     return (
       <Grid container>
