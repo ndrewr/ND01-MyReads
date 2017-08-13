@@ -54,10 +54,15 @@ class SearchPage extends Component {
   };
 
   prepareResults = async results => {
-    const bookList = await BooksAPI.getAll();
+    const currentBookList = await BooksAPI.getAll();
+    const currentBookIds = currentBookList.map(book => book.id);
+    const preparedResults = results.map(resultBook => {
+      const matchId = currentBookIds.indexOf(resultBook.id);
+      return matchId >= 0 ? currentBookList[matchId] : resultBook;
+    });
 
     // this.props.update(results);
-    this.setState({ bookResults: results });
+    this.setState({ bookResults: preparedResults });
   };
 
   searchBooks = async event => {
