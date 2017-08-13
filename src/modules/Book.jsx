@@ -72,10 +72,7 @@ class Book extends Component {
           <CardMedia className={classes.imageContainer}>
             <img
               className={classes.thumbnail}
-              src={
-                imageLinks.thumbnail ||
-                'http://www.speakers-pro.com/wp-content/uploads/2014/04/no-cover-placeholder.jpg'
-              }
+              src={imageLinks.thumbnail || 'images/no-cover-placeholder.jpg'}
               alt="Book cover"
             />
           </CardMedia>
@@ -123,6 +120,4 @@ class Book extends Component {
   }
 }
 
-const StyledBook = withStyles(styleSheet)(Book);
-
-export default StyledBook;
+export default withStyles(styleSheet)(Book);

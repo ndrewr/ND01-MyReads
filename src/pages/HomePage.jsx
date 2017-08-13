@@ -2,11 +2,8 @@
 
 import React, { Component } from 'react';
 
-// import * as BooksAPI from '../BooksAPI';
-
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-// import { withStyles, createStyleSheet } from 'material-ui/styles';
 
 import Shelf from '../modules/Shelf';
 
@@ -17,45 +14,16 @@ const shelves = {
 };
 
 class HomePage extends Component {
-  // state = {
-  //   books: []
-  // };
   props: {
     books: Array<BookItem>,
     updateItem: (BookItem, string) => void
-    // updateList: (Array<BookItem>) => void,
   };
 
-  // async fetchBooks() {
-  //   const books = await BooksAPI.getAll();
-  //   console.log('book collection is...', books);
-  //   this.setState({ books });
-  // }
-
   changeShelf = (targetBook: any, shelfType: string) => {
-    // BooksAPI.update(targetBook, shelfType).then(response => {
-    //   // const books = this.state.books.slice();
-    //   const books: Array<BookItem> = this.props.books.slice();
-
-    //   const targetBookIndex = books.findIndex(
-    //     book => book.id === targetBook.id
-    //   );
-    //   books[targetBookIndex] = Object.assign({}, targetBook, {
-    //     shelf: shelfType
-    //   });
-    //   // this.setState({ books });
-    //   this.props.update(books);
-    // });
-
     this.props.updateItem(targetBook, shelfType);
   };
 
-  // componentDidMount() {
-  //   this.fetchBooks();
-  // }
-
   render() {
-    // const { books } = this.state;
     const { books } = this.props;
 
     return (

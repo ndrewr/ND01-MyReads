@@ -1,58 +1,43 @@
 // @flow
 
-import React from 'react';
+import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
 import * as BooksAPI from '../BooksAPI';
 
 import Grid from 'material-ui/Grid';
-// import { withStyles, createStyleSheet } from 'material-ui/styles';
 
 import HomePage from '../pages/HomePage';
 import SearchPage from '../pages/SearchPage';
 
 import Navbar from './Navbar';
 
-// const AppContainer = () =>
-//   <Grid container>
-//     <Navbar />
-//     <Grid item xs={12}>
-//       <Route exact path="/" component={HomePage} />
-//       <Route path="/search" component={SearchPage} />
-//     </Grid>
-//   </Grid>;
-
-class AppContainer extends React.Component {
+class AppContainer extends Component {
   state = {
     books: []
   };
 
-  updateBookList = (updatedBookList: Array<BookItem>): void => {
+  updateBookList = (updatedBookList: Array<BookItem>) => {
     this.setState({ books: updatedBookList });
   };
 
-  updateBook = (targetBook: BookItem, shelfType: string): void => {
-    console.log(
-      'app is assigning this book: ',
-      targetBook.title,
-      ' to ',
-      shelfType
-    );
+  updateBook = (targetBook: BookItem, shelfType: string) => {
     BooksAPI.update(targetBook, shelfType).then(response => {
-      const books = this.state.books.slice();
-      const targetBookIndex = books.findIndex(
-        book => book.id === targetBook.id
+      const books: Array<BookItem> = this.state.books.slice();
+      const targetBookIndex: number = books.findIndex(
+        (book: BookItem) => book.id === targetBook.id
       );
+
       books[targetBookIndex] = Object.assign({}, targetBook, {
         shelf: shelfType
       });
+
       this.updateBookList(books);
     });
   };
 
   async fetchBooks() {
-    const books = await BooksAPI.getAll();
-    console.log('book collection is...', books);
+    const books: Array<BookItem> = await BooksAPI.getAll();
     this.setState({ books });
   }
 
