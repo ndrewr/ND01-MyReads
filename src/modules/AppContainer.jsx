@@ -31,6 +31,25 @@ class AppContainer extends React.Component {
     this.setState({ books: updatedBookList });
   };
 
+  updateBook = (targetBook: BookItem, shelfType: string): void => {
+    console.log(
+      'app is assigning this book: ',
+      targetBook.title,
+      ' to ',
+      shelfType
+    );
+    BooksAPI.update(targetBook, shelfType).then(response => {
+      const books = this.state.books.slice();
+      const targetBookIndex = books.findIndex(
+        book => book.id === targetBook.id
+      );
+      books[targetBookIndex] = Object.assign({}, targetBook, {
+        shelf: shelfType
+      });
+      this.updateBookList(books);
+    });
+  };
+
   async fetchBooks() {
     const books = await BooksAPI.getAll();
     console.log('book collection is...', books);
@@ -45,10 +64,10 @@ class AppContainer extends React.Component {
     const { books } = this.state;
 
     const renderHomePage = () =>
-      <HomePage books={books} update={this.updateBookList} />;
+      <HomePage books={books} updateItem={this.updateBook} />;
 
     const renderSearchPage = () =>
-      <SearchPage books={books} update={this.updateBookList} />;
+      <SearchPage books={books} updateItem={this.updateBook} />;
 
     return (
       <Grid container>

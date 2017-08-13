@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 
-import * as BooksAPI from '../BooksAPI';
+// import * as BooksAPI from '../BooksAPI';
 
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -22,7 +22,8 @@ class HomePage extends Component {
   // };
   props: {
     books: Array<BookItem>,
-    update: (Array<BookItem>) => mixed
+    updateItem: (BookItem, string) => void
+    // updateList: (Array<BookItem>) => void,
   };
 
   // async fetchBooks() {
@@ -32,19 +33,21 @@ class HomePage extends Component {
   // }
 
   changeShelf = (targetBook: any, shelfType: string) => {
-    BooksAPI.update(targetBook, shelfType).then(response => {
-      // const books = this.state.books.slice();
-      const books: Array<BookItem> = this.props.books.slice();
+    // BooksAPI.update(targetBook, shelfType).then(response => {
+    //   // const books = this.state.books.slice();
+    //   const books: Array<BookItem> = this.props.books.slice();
 
-      const targetBookIndex = books.findIndex(
-        book => book.id === targetBook.id
-      );
-      books[targetBookIndex] = Object.assign({}, targetBook, {
-        shelf: shelfType
-      });
-      // this.setState({ books });
-      this.props.update(books);
-    });
+    //   const targetBookIndex = books.findIndex(
+    //     book => book.id === targetBook.id
+    //   );
+    //   books[targetBookIndex] = Object.assign({}, targetBook, {
+    //     shelf: shelfType
+    //   });
+    //   // this.setState({ books });
+    //   this.props.update(books);
+    // });
+
+    this.props.updateItem(targetBook, shelfType);
   };
 
   // componentDidMount() {

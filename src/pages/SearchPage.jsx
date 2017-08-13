@@ -31,7 +31,8 @@ class SearchPage extends Component {
   props: {
     books: Array<BookItem>,
     classes: any,
-    update: (Array<BookItem>) => void
+    // updateList: (Array<BookItem>) => void
+    updateItem: (BookItem, string) => void
   };
 
   // constructor(props) {
@@ -41,20 +42,24 @@ class SearchPage extends Component {
 
   assignToShelf = (targetBook: any, shelfType: string) => {
     console.log('assign this book to a shelf!');
-    // BooksAPI.update(targetBook, shelfType).then(response => {
-    //   const books = this.state.books.slice();
-    //   const targetBookIndex = books.findIndex(
-    //     book => book.id === targetBook.id
-    //   );
-    //   books[targetBookIndex] = Object.assign({}, targetBook, {
-    //     shelf: shelfType
-    //   });
-    //   this.setState({ books });
+
+    // BooksAPI.update(targetBook, shelfType)
+    // .then(response => {
+    const books = this.state.bookResults.slice();
+    const targetBookIndex = books.findIndex(book => book.id === targetBook.id);
+    books[targetBookIndex] = Object.assign({}, targetBook, {
+      shelf: shelfType
+    });
+    this.setState({ bookResults: books });
     // });
+
+    this.props.updateItem(targetBook, shelfType);
   };
 
   prepareResults = async results => {
-    const currentBookList = await BooksAPI.getAll();
+    // const currentBookList = await BooksAPI.getAll();
+    const currentBookList = this.props.books;
+
     const currentBookIds = currentBookList.map(book => book.id);
     const preparedResults = results.map(resultBook => {
       const matchId = currentBookIds.indexOf(resultBook.id);
