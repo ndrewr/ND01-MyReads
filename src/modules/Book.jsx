@@ -62,15 +62,20 @@ class Book extends Component {
   };
 
   render() {
-    const { classes, book: { authors, imageLinks, title, shelf } } = this.props;
-
+    const {
+      classes,
+      book: { authors, imageLinks = {}, title, shelf }
+    } = this.props;
     return (
       <Grid item xs={12} sm={6} md={4}>
         <Card className={classes.card}>
           <CardMedia className={classes.imageContainer}>
             <img
               className={classes.thumbnail}
-              src={imageLinks.thumbnail}
+              src={
+                imageLinks.thumbnail ||
+                'http://www.speakers-pro.com/wp-content/uploads/2014/04/no-cover-placeholder.jpg'
+              }
               alt="Book cover"
             />
           </CardMedia>
