@@ -3,6 +3,10 @@ declare module 'material-ui/AppBar' {
    declare var exports: any;
 }
 
+declare module 'material-ui/BottomNavigation' {
+   declare var exports: any;
+}
+
 declare module 'material-ui/Button' {
    declare var exports: any;
 }
@@ -12,6 +16,10 @@ declare module 'material-ui/Card' {
 }
 
 declare module 'material-ui/Grid' {
+   declare var exports: any;
+}
+
+declare module 'material-ui/Icon' {
    declare var exports: any;
 }
 

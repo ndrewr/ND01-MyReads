@@ -11,7 +11,7 @@ import Book from './Book';
 const styleSheet = createStyleSheet(theme => ({
   root: {
     flexGrow: 1,
-    marginTop: 30
+    margin: '3rem 0 4rem'
   }
 }));
 
@@ -38,12 +38,10 @@ const EmptyShelf = () =>
   <Typography type="display1">Add books to this list!</Typography>;
 
 const Shelf = ({
-  classes,
   items,
   label,
   onChange
 }: {
-  classes: any,
   items: Array<BookItem>,
   label: string,
   onChange: () => mixed

@@ -4,7 +4,9 @@ import React, { Component } from 'react';
 
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 
+import Divider from '../modules/Divider';
 import Shelf from '../modules/Shelf';
 
 const shelves = {
@@ -32,6 +34,7 @@ class HomePage extends Component {
           <Typography type="display4" color="inherit">
             Home.
           </Typography>
+          <Divider />
           {Object.keys(shelves).map(shelfKey =>
             <Shelf
               key={shelfKey}

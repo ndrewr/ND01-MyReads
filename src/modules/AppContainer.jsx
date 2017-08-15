@@ -10,6 +10,7 @@ import Grid from 'material-ui/Grid';
 import HomePage from '../pages/HomePage';
 import SearchPage from '../pages/SearchPage';
 
+import BottomNav from './BottomNav';
 import Navbar from './Navbar';
 
 class AppContainer extends Component {
@@ -48,6 +49,10 @@ class AppContainer extends Component {
   render() {
     const { books } = this.state;
 
+    const pageStyles = {
+      padding: '2% 5%'
+    };
+
     const renderHomePage = () =>
       <HomePage books={books} updateItem={this.updateBook} />;
 
@@ -57,10 +62,11 @@ class AppContainer extends Component {
     return (
       <Grid container>
         <Navbar />
-        <Grid item xs={12}>
+        <Grid item xs={12} style={pageStyles}>
           <Route exact path="/" render={renderHomePage} />
           <Route path="/search" render={renderSearchPage} />
         </Grid>
+        <BottomNav />
       </Grid>
     );
   }

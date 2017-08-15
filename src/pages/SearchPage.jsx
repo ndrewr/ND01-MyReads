@@ -9,6 +9,7 @@ import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 
+import Divider from '../modules/Divider';
 import Shelf from '../modules/Shelf';
 
 const styleSheet = createStyleSheet(theme => ({
@@ -18,7 +19,11 @@ const styleSheet = createStyleSheet(theme => ({
   },
   textField: {
     marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing.unit,
+    '& input': {
+      color: 'black',
+      borderBottom: '1px solid lightgray'
+    }
   }
 }));
 
@@ -84,7 +89,7 @@ class SearchPage extends Component {
 
   render() {
     const { bookResults, query } = this.state;
-    const { books, classes } = this.props;
+    const { classes } = this.props;
 
     return (
       <Grid container>
@@ -92,6 +97,7 @@ class SearchPage extends Component {
           <Typography type="display4" color="inherit">
             Search!
           </Typography>
+          <Divider icon="search" />
           <TextField
             id="margin-normal"
             className={classes.textField}
@@ -102,7 +108,7 @@ class SearchPage extends Component {
             onChange={this.searchBooks}
             value={query}
           />
-          {books.length
+          {bookResults.length
             ? <Shelf
                 items={bookResults}
                 label="results:"
