@@ -1,13 +1,15 @@
 declare type BookItem = {
-  title: string,
+  authors: Array<string>,
   description: string,
+  id: string
   imageLinks: {
     thumbnail: string,
     smallThumbnail: string
   },
-  authors: Array<string>,
+  maturityRating: string,
+  pageCount: string,
   shelf: string,
-  id: string
+  title: string,
 };
 
 declare type BooksApiError = {

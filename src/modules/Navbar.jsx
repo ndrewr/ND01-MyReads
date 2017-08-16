@@ -16,7 +16,7 @@ const styleSheet = createStyleSheet(theme => ({
   },
   logo: {
     fontSize: '36px',
-    marginRight: '1rem',
+    margin: '0 1rem',
     verticalAlign: 'bottom'
   }
 }));
@@ -33,7 +33,7 @@ const Navbar = ({ classes }) =>
   <AppBar position="static" color="default">
     <Toolbar>
       <Typography type="display1" color="inherit">
-        <Icon className={classes.logo}>book</Icon>
+        <Icon className={classes.logo}>import_contacts</Icon>
         My Reads
       </Typography>
       <LinkButton path="/" label="Home" />

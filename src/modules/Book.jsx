@@ -18,6 +18,7 @@ const shelves = {
 const styleSheet = createStyleSheet({
   card: {
     // width: 300,
+    position: 'relative'
   },
   imageContainer: {
     textAlign: 'center',
@@ -27,13 +28,25 @@ const styleSheet = createStyleSheet({
     height: 420,
     width: 'auto',
     padding: 20
+  },
+  innerCover: {
+    position: 'absolute',
+    top: 0,
+    width: '100%',
+    height: '100%',
+    zIndex: '0'
+  },
+  outerCover: {
+    position: 'relative',
+    zIndex: '100'
   }
 });
 
 class Book extends Component {
   state = {
     anchorEl: null,
-    showOptions: false
+    showOptions: false,
+    showMore: 0
   };
 
   props: {
@@ -61,60 +74,103 @@ class Book extends Component {
     this.setState({ showOptions: false });
   };
 
+  showMoreInfo = () => {
+    this.setState({ showMore: 200 });
+  };
+
+  hideMoreInfo = () => {
+    this.setState({ showMore: 0 });
+  };
+
   render() {
     const {
       classes,
-      book: { authors, imageLinks = {}, title, shelf }
+      book: {
+        authors,
+        description,
+        imageLinks = {},
+        maturityRating,
+        pageCount,
+        title,
+        shelf
+      }
     } = this.props;
+
+    const { showMore } = this.state;
+    console.log('book info: ', this.props.book);
+
     return (
       <Grid item xs={12} sm={6} md={4}>
-        <Card className={classes.card}>
-          <CardMedia className={classes.imageContainer}>
-            <img
-              className={classes.thumbnail}
-              src={imageLinks.thumbnail || 'images/no-cover-placeholder.jpg'}
-              alt="Book cover"
-            />
-          </CardMedia>
-          <CardContent>
-            <Typography type="headline" component="h2">
-              {title || 'No title'}
-            </Typography>
-            <Typography component="p">
-              {authors ? authors.join(', ') : 'No authors listed'}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button
-              dense
-              color="primary"
-              aria-owns={this.state.showOptions ? 'options-menu' : null}
-              aria-haspopup="true"
-              onClick={this.handleMenuOpen}
-            >
-              Add to Shelf
-            </Button>
-            <Button dense color="primary">
-              Learn More
-            </Button>
-          </CardActions>
-        </Card>
-        <Menu
-          id="options-menu"
-          anchorEl={this.state.anchorEl}
-          open={this.state.showOptions}
-          onRequestClose={this.handleMenuClose}
-        >
-          {Object.keys(shelves).map(shelfType =>
-            <MenuItem
-              key={shelfType}
-              selected={shelfType === shelf}
-              onClick={this.handleClick(shelfType)}
-            >
-              {shelves[shelfType]}
-            </MenuItem>
-          )}
-        </Menu>
+        <div className={classes.card}>
+          <Card className={classes.outerCover}>
+            <CardMedia className={classes.imageContainer}>
+              <img
+                className={classes.thumbnail}
+                src={imageLinks.thumbnail || 'images/no-cover-placeholder.jpg'}
+                alt="Book cover"
+              />
+            </CardMedia>
+            <CardContent>
+              <Typography type="headline" component="h2" noWrap title={title}>
+                {title || 'No title'}
+              </Typography>
+              <Typography component="p">
+                {authors ? authors.join(', ') : 'No authors listed'}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button
+                dense
+                color="primary"
+                aria-owns={this.state.showOptions ? 'options-menu' : null}
+                aria-haspopup="true"
+                onClick={this.handleMenuOpen}
+              >
+                Add to Shelf
+              </Button>
+              <Button dense color="primary" onClick={this.showMoreInfo}>
+                Learn More
+              </Button>
+            </CardActions>
+          </Card>
+          <Card className={classes.innerCover} style={{ zIndex: showMore }}>
+            <CardContent>
+              <Typography type="headline" component="h2">
+                {title || 'No title'}
+              </Typography>
+              <Typography component="p">
+                {description || 'Description pending...'}
+              </Typography>
+              <Typography component="p">
+                {maturityRating || 'Rating pending...'}
+              </Typography>
+              <Typography component="p">
+                {pageCount || 'Page count pending...'}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button dense color="primary" onClick={this.hideMoreInfo}>
+                Close
+              </Button>
+            </CardActions>
+          </Card>
+          <Menu
+            id="options-menu"
+            anchorEl={this.state.anchorEl}
+            open={this.state.showOptions}
+            onRequestClose={this.handleMenuClose}
+          >
+            {Object.keys(shelves).map(shelfType =>
+              <MenuItem
+                key={shelfType}
+                selected={shelfType === shelf}
+                onClick={this.handleClick(shelfType)}
+              >
+                {shelves[shelfType]}
+              </MenuItem>
+            )}
+          </Menu>
+        </div>
       </Grid>
     );
   }
