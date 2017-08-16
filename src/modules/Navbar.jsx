@@ -5,38 +5,21 @@ import { Link } from 'react-router-dom';
 
 import AppBar from 'material-ui/AppBar';
 import Button from 'material-ui/Button';
+import Icon from 'material-ui/Icon';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-
 import { withStyles, createStyleSheet } from 'material-ui/styles';
-import Icon from 'material-ui/Icon';
 
 const styleSheet = createStyleSheet(theme => ({
   button: {
     margin: theme.spacing.unit
   },
-  a: {
-    '& button': {
-      color: 'black'
-    }
+  logo: {
+    fontSize: '36px',
+    marginRight: '1rem',
+    verticalAlign: 'bottom'
   }
 }));
-
-const FloatingActionButton = withStyles(
-  styleSheet
-)(({ children, classes, icon, ...rest }) =>
-  <Button
-    fab
-    color="primary"
-    aria-label="add"
-    className={classes.button}
-    {...rest}
-  >
-    <Icon>
-      {icon}
-    </Icon>
-  </Button>
-);
 
 const LinkButton = withStyles(styleSheet)(({ classes, path, label }) =>
   <Link to={path}>
@@ -46,10 +29,11 @@ const LinkButton = withStyles(styleSheet)(({ classes, path, label }) =>
   </Link>
 );
 
-const Navbar = () =>
+const Navbar = ({ classes }) =>
   <AppBar position="static" color="default">
     <Toolbar>
       <Typography type="display1" color="inherit">
+        <Icon className={classes.logo}>book</Icon>
         My Reads
       </Typography>
       <LinkButton path="/" label="Home" />
@@ -57,4 +41,4 @@ const Navbar = () =>
     </Toolbar>
   </AppBar>;
 
-export default Navbar;
+export default withStyles(styleSheet)(Navbar);

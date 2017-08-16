@@ -92,7 +92,7 @@ class Book extends Component {
               aria-haspopup="true"
               onClick={this.handleMenuOpen}
             >
-              Add this book
+              Add to Shelf
             </Button>
             <Button dense color="primary">
               Learn More
