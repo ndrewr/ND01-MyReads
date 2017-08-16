@@ -25,14 +25,22 @@ class AppContainer extends Component {
   updateBook = (targetBook: BookItem, shelfType: string) => {
     BooksAPI.update(targetBook, shelfType).then(response => {
       const books: Array<BookItem> = this.state.books.slice();
+      const updatedBook = Object.assign({}, targetBook, { shelf: shelfType });
       const targetBookIndex: number = books.findIndex(
         (book: BookItem) => book.id === targetBook.id
       );
 
-      books[targetBookIndex] = Object.assign({}, targetBook, {
-        shelf: shelfType
-      });
+      if (targetBookIndex >= 0) {
+        books[targetBookIndex] = updatedBook;
+      } else {
+        books.push(updatedBook);
+      }
 
+      console.log(
+        'updateBook called: here is the updated list...',
+        books,
+        targetBookIndex
+      );
       this.updateBookList(books);
     });
   };

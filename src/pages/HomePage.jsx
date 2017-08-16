@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
 
 import Divider from '../modules/Divider';
 import Shelf from '../modules/Shelf';

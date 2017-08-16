@@ -40,7 +40,7 @@ const FloatingActionButton = withStyles(
 
 const LinkButton = withStyles(styleSheet)(({ classes, path, label }) =>
   <Link to={path}>
-    <Button raised color=" contrast" className={classes.button}>
+    <Button raised color="accent" className={classes.button}>
       {label}
     </Button>
   </Link>
@@ -49,7 +49,7 @@ const LinkButton = withStyles(styleSheet)(({ classes, path, label }) =>
 const Navbar = () =>
   <AppBar position="static" color="default">
     <Toolbar>
-      <Typography type="display" color="inherit">
+      <Typography type="display1" color="inherit">
         My Reads
       </Typography>
       <LinkButton path="/" label="Home" />
