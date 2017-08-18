@@ -17,7 +17,6 @@ const shelves = {
 
 const styleSheet = createStyleSheet({
   card: {
-    // width: 300,
     position: 'relative'
   },
   imageContainer: {
@@ -35,6 +34,20 @@ const styleSheet = createStyleSheet({
     width: '100%',
     height: '100%',
     zIndex: '0'
+  },
+  innerCover_actions: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    justifyContent: 'center'
+  },
+  innerCover_title: {
+    maxHeight: 96
+  },
+  innerCover_description: {
+    minHeight: 120,
+    maxHeight: 240,
+    overflowY: 'auto'
   },
   outerCover: {
     position: 'relative',
@@ -99,6 +112,12 @@ class Book extends Component {
     const { showMore } = this.state;
     console.log('book info: ', this.props.book);
 
+    // const symbols = ['2665', '270D', '2712', '2711', '2742', '2761', '2756'];
+    const symbols = [9997, 10002, 10001, 10022, 10037, 10050, 10070, 10078];
+    const randomSymbol = () =>
+      String.fromCharCode(symbols[Math.floor(Math.random() * symbols.length)]);
+    // const randomSymbol = '&#' + symbols[Math.floor(Math.random()*symbols.length)] + ';'
+
     return (
       <Grid item xs={12} sm={6} md={4}>
         <div className={classes.card}>
@@ -135,20 +154,30 @@ class Book extends Component {
           </Card>
           <Card className={classes.innerCover} style={{ zIndex: showMore }}>
             <CardContent>
-              <Typography type="headline" component="h2">
+              <Typography type="headline" align="center">
                 {title || 'No title'}
+                <h2 style={{ textAlign: 'center' }}>
+                  {randomSymbol()}
+                </h2>
               </Typography>
-              <Typography component="p">
+              <Typography
+                component="p"
+                paragraph
+                className={classes.innerCover_description}
+              >
                 {description || 'Description pending...'}
               </Typography>
-              <Typography component="p">
+              <Typography type="subheading" align="right" gutterBottom>
+                {authors ? authors.join(', ') : 'No authors listed'}
+              </Typography>
+              <Typography component="p" align="right" type="caption">
                 {maturityRating || 'Rating pending...'}
               </Typography>
-              <Typography component="p">
+              <Typography component="p" align="right" type="caption">
                 {pageCount || 'Page count pending...'}
               </Typography>
             </CardContent>
-            <CardActions>
+            <CardActions className={classes.innerCover_actions}>
               <Button dense color="primary" onClick={this.hideMoreInfo}>
                 Close
               </Button>

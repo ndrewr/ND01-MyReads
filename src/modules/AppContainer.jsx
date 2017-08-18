@@ -58,7 +58,8 @@ class AppContainer extends Component {
     const { books } = this.state;
 
     const pageStyles = {
-      padding: '2% 5%'
+      padding: '2% 5%',
+      marginTop: 64
     };
 
     const renderHomePage = () =>

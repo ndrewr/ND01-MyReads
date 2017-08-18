@@ -30,7 +30,7 @@ const LinkButton = withStyles(styleSheet)(({ classes, path, label }) =>
 );
 
 const Navbar = ({ classes }) =>
-  <AppBar position="static" color="default">
+  <AppBar color="default">
     <Toolbar>
       <Typography type="display1" color="inherit">
         <Icon className={classes.logo}>import_contacts</Icon>
