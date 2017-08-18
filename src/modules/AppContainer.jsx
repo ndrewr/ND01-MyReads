@@ -18,6 +18,12 @@ class AppContainer extends Component {
     books: []
   };
 
+  shelves: ShelfMap = {
+    currentlyReading: 'Currently Reading',
+    wantToRead: 'Want to Read',
+    read: 'Read'
+  };
+
   updateBookList = (updatedBookList: Array<BookItem>) => {
     this.setState({ books: updatedBookList });
   };
@@ -36,11 +42,6 @@ class AppContainer extends Component {
         books.push(updatedBook);
       }
 
-      console.log(
-        'updateBook called: here is the updated list...',
-        books,
-        targetBookIndex
-      );
       this.updateBookList(books);
     });
   };
@@ -55,7 +56,7 @@ class AppContainer extends Component {
   }
 
   render() {
-    const { books } = this.state;
+    const { shelves, updateBook, state: { books } } = this;
 
     const pageStyles = {
       padding: '2% 5%',
@@ -63,10 +64,10 @@ class AppContainer extends Component {
     };
 
     const renderHomePage = () =>
-      <HomePage books={books} updateItem={this.updateBook} />;
+      <HomePage books={books} shelves={shelves} updateItem={updateBook} />;
 
     const renderSearchPage = () =>
-      <SearchPage books={books} updateItem={this.updateBook} />;
+      <SearchPage books={books} shelves={shelves} updateItem={updateBook} />;
 
     return (
       <Grid container>

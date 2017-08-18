@@ -8,24 +8,19 @@ import Typography from 'material-ui/Typography';
 import Divider from '../modules/Divider';
 import Shelf from '../modules/Shelf';
 
-const shelves = {
-  currentlyReading: 'Currently Reading',
-  wantToRead: 'Want to Read',
-  read: 'Read'
-};
-
 class HomePage extends Component {
   props: {
     books: Array<BookItem>,
+    shelves: ShelfMap,
     updateItem: (BookItem, string) => void
   };
 
-  changeShelf = (targetBook: any, shelfType: string) => {
+  changeShelf = (targetBook: BookItem, shelfType: string) => {
     this.props.updateItem(targetBook, shelfType);
   };
 
   render() {
-    const { books } = this.props;
+    const { books, shelves } = this.props;
 
     return (
       <Grid container>
@@ -39,6 +34,7 @@ class HomePage extends Component {
               key={shelfKey}
               items={books.filter(book => book.shelf === shelfKey)}
               label={shelves[shelfKey]}
+              shelves={shelves}
               onChange={this.changeShelf}
             />
           )}

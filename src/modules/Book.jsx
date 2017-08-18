@@ -2,6 +2,8 @@
 
 import React, { Component } from 'react';
 
+import { randomSymbol } from '../utils';
+
 import Button from 'material-ui/Button';
 import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
 import Grid from 'material-ui/Grid';
@@ -9,11 +11,9 @@ import Menu, { MenuItem } from 'material-ui/Menu';
 import Typography from 'material-ui/Typography';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 
-const shelves = {
-  currentlyReading: 'Currently Reading',
-  wantToRead: 'Want to Read',
-  read: 'Read'
-};
+// get around strange behaviour with Flow checks in this file
+type BookItem = BookItem;
+type ShelfMap = ShelfMap;
 
 const styleSheet = createStyleSheet({
   card: {
@@ -65,7 +65,8 @@ class Book extends Component {
   props: {
     classes: any,
     book: BookItem,
-    onChange: any
+    shelves: ShelfMap,
+    onChange: (BookItem, string) => mixed
   };
 
   handleClick = (shelfType: string) => {
@@ -104,19 +105,13 @@ class Book extends Component {
         imageLinks = {},
         maturityRating,
         pageCount,
-        title,
-        shelf
-      }
+        shelf,
+        title
+      },
+      shelves
     } = this.props;
 
     const { showMore } = this.state;
-    console.log('book info: ', this.props.book);
-
-    // const symbols = ['2665', '270D', '2712', '2711', '2742', '2761', '2756'];
-    const symbols = [9997, 10002, 10001, 10022, 10037, 10050, 10070, 10078];
-    const randomSymbol = () =>
-      String.fromCharCode(symbols[Math.floor(Math.random() * symbols.length)]);
-    // const randomSymbol = '&#' + symbols[Math.floor(Math.random()*symbols.length)] + ';'
 
     return (
       <Grid item xs={12} sm={6} md={4}>

@@ -34,8 +34,9 @@ class SearchPage extends Component {
   };
 
   props: {
-    books: Array<BookItem>,
     classes: any,
+    books: Array<BookItem>,
+    shelves: ShelfMap,
     updateItem: (BookItem, string) => void
   };
 
@@ -89,7 +90,7 @@ class SearchPage extends Component {
 
   render() {
     const { bookResults, query } = this.state;
-    const { classes } = this.props;
+    const { classes, shelves } = this.props;
 
     return (
       <Grid container>
@@ -112,6 +113,7 @@ class SearchPage extends Component {
             ? <Shelf
                 items={bookResults}
                 label="results:"
+                shelves={shelves}
                 onChange={this.assignToShelf}
               />
             : <Typography type="display1" color="inherit">

@@ -8,6 +8,10 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 
 import Book from './Book';
 
+// get around strange behaviour with Flow checks in this file
+type BookItem = BookItem;
+type ShelfMap = ShelfMap;
+
 const styleSheet = createStyleSheet(theme => ({
   root: {
     flexGrow: 1,
@@ -21,15 +25,22 @@ const BookShelf = withStyles(
   ({
     classes,
     items,
+    shelves,
     onChange
   }: {
     classes: any,
     items: Array<BookItem>,
+    shelves: ShelfMap,
     onChange: () => mixed
   }) =>
     <Grid container className={classes.root} justify="center" spacing={24}>
       {items.map((book, index) =>
-        <Book key={book.title + index} book={book} onChange={onChange} />
+        <Book
+          key={book.title + index}
+          book={book}
+          shelves={shelves}
+          onChange={onChange}
+        />
       )}
     </Grid>
 );
@@ -40,10 +51,12 @@ const EmptyShelf = () =>
 const Shelf = ({
   items,
   label,
+  shelves,
   onChange
 }: {
   items: Array<BookItem>,
   label: string,
+  shelves: Array<string>,
   onChange: () => mixed
 }) =>
   <Grid container>
@@ -53,7 +66,7 @@ const Shelf = ({
       </Typography>
       <hr />
       {items.length
-        ? <BookShelf items={items} onChange={onChange} />
+        ? <BookShelf items={items} shelves={shelves} onChange={onChange} />
         : <EmptyShelf />}
     </Grid>
   </Grid>;

@@ -1,7 +1,7 @@
 declare type BookItem = {
   authors: Array<string>,
   description: string,
-  id: string
+  id: string,
   imageLinks: {
     thumbnail: string,
     smallThumbnail: string
@@ -15,4 +15,8 @@ declare type BookItem = {
 declare type BooksApiError = {
   error: string,
   items: Array<any>
+}
+
+declare type ShelfMap = {
+  [shelfType: string]: string
 }
