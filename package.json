@@ -1,6 +1,7 @@
 {
-  "license": "UNLICENSED",
+  "license": "MIT",
   "private": true,
+  "homepage": "https://uncleoptimus.github.io/ND01-MyReads",
   "dependencies": {
     "flow-typed": "^2.1.5",
     "material-ui": "next",
@@ -11,6 +12,7 @@
   },
   "devDependencies": {
     "flow-bin": "^0.51.1",
+    "gh-pages": "^1.0.0",
     "husky": "^0.14.3",
     "lint-staged": "^4.0.2",
     "prettier": "^1.5.3",
@@ -22,7 +24,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "flow": "flow"
+    "flow": "flow",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [
