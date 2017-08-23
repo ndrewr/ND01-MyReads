@@ -7,11 +7,13 @@ Uses React in combo with MaterialUI to create the views and a custom backend wit
 
 Bootstrapped with [create-react-app](https://github.com/facebookincubator/create-react-app).
 
+Based on [this project template](https://github.com/udacity/reactnd-project-myreads-starter).
+
 
 ### Prerequisites
 
 Running this project requires [Node](https://nodejs.org/en/) to be installed.
-[Yarn](https://code.facebook.com/posts/1840075619545360)) must also be installed.
+[Yarn](https://code.facebook.com/posts/1840075619545360) must also be installed.
 
 
 ### Installing and Running
@@ -31,7 +33,7 @@ Then go to `localhost:3000` in your browser to view the app.
 This project is currently deployed to Github-Pages, accessible at:
 https://uncleoptimus.github.io/ND01-MyReads
 
-A cloned project can be deployed with the command `yarn run deploy`
+A cloned project already pushed to Github can be deployed with the command `yarn run deploy`
 
 
 ## Built With
@@ -47,4 +49,4 @@ A cloned project can be deployed with the command `yarn run deploy`
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License
