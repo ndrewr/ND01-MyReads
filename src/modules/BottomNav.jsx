@@ -2,12 +2,14 @@
 
 import React from 'react';
 
+// MaterialUI components
 import BottomNavigation, {
   BottomNavigationButton
 } from 'material-ui/BottomNavigation';
 import Icon from 'material-ui/Icon';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 
+// component styles
 const styleSheet = createStyleSheet(theme => ({
   button: {
     margin: theme.spacing.unit

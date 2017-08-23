@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 
+// MaterialUI components
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 
@@ -12,7 +13,7 @@ class HomePage extends Component {
   props: {
     books: Array<BookItem>,
     shelves: ShelfMap,
-    updateItem: (BookItem, string) => void
+    updateItem: (BookItem, string) => mixed
   };
 
   changeShelf = (targetBook: BookItem, shelfType: string) => {

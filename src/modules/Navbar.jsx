@@ -3,6 +3,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// MaterialUI components
 import AppBar from 'material-ui/AppBar';
 import Button from 'material-ui/Button';
 import Icon from 'material-ui/Icon';
@@ -10,6 +11,7 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 
+// component styles
 const styleSheet = createStyleSheet(theme => ({
   button: {
     margin: theme.spacing.unit

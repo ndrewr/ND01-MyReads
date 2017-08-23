@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 
 import * as BooksAPI from '../BooksAPI';
 
+// MaterialUI components
 import Grid from 'material-ui/Grid';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
@@ -12,6 +13,7 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Divider from '../modules/Divider';
 import Shelf from '../modules/Shelf';
 
+// component styles
 const styleSheet = createStyleSheet(theme => ({
   container: {
     display: 'flex',
@@ -54,7 +56,7 @@ class SearchPage extends Component {
     this.props.updateItem(targetBook, shelfType);
   };
 
-  prepareResults = async (results: Array<BookItem>) => {
+  prepareResults = (results: Array<BookItem>) => {
     const currentBookList: Array<BookItem> = this.props.books;
     const currentBookIds: Array<string> = currentBookList.map(book => book.id);
     const preparedResults: Array<BookItem> = results.map(resultBook => {

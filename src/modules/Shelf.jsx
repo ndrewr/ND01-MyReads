@@ -2,15 +2,12 @@
 
 import React from 'react';
 
+// MaterialUI components
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 
 import Book from './Book';
-
-// get around strange behaviour with Flow checks in this file
-type BookItem = BookItem;
-type ShelfMap = ShelfMap;
 
 const styleSheet = createStyleSheet(theme => ({
   root: {

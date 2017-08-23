@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 
 import * as BooksAPI from '../BooksAPI';
 
+// MaterialUI components
 import Grid from 'material-ui/Grid';
 
 import HomePage from '../pages/HomePage';
@@ -28,8 +29,16 @@ class AppContainer extends Component {
     this.setState({ books: updatedBookList });
   };
 
-  updateBook = (targetBook: BookItem, shelfType: string) => {
-    BooksAPI.update(targetBook, shelfType).then(response => {
+  updateBook = async (targetBook: BookItem, shelfType: string) => {
+    let response: UpdateResponse = null;
+
+    try {
+      response = await BooksAPI.update(targetBook, shelfType);
+    } catch (error) {
+      console.log(`Problem with update: ${error}; Aborting action.`);
+    }
+
+    if (response) {
       const books: Array<BookItem> = this.state.books.slice();
       const updatedBook = Object.assign({}, targetBook, { shelf: shelfType });
       const targetBookIndex: number = books.findIndex(
@@ -43,7 +52,7 @@ class AppContainer extends Component {
       }
 
       this.updateBookList(books);
-    });
+    }
   };
 
   async fetchBooks() {

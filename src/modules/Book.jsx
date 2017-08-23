@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 
 import { randomSymbol } from '../utils';
 
+// MaterialUI components
 import Button from 'material-ui/Button';
 import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
 import Grid from 'material-ui/Grid';
@@ -11,10 +12,7 @@ import Menu, { MenuItem } from 'material-ui/Menu';
 import Typography from 'material-ui/Typography';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 
-// get around strange behaviour with Flow checks in this file
-type BookItem = BookItem;
-type ShelfMap = ShelfMap;
-
+// component styles
 const styleSheet = createStyleSheet({
   card: {
     position: 'relative'
@@ -46,7 +44,7 @@ const styleSheet = createStyleSheet({
   },
   innerCover_description: {
     minHeight: 120,
-    maxHeight: 240,
+    maxHeight: 290,
     overflowY: 'auto'
   },
   outerCover: {
@@ -151,9 +149,9 @@ class Book extends Component {
             <CardContent>
               <Typography type="headline" align="center">
                 {title || 'No title'}
-                <h2 style={{ textAlign: 'center' }}>
+                <div style={{ textAlign: 'center' }}>
                   {randomSymbol()}
-                </h2>
+                </div>
               </Typography>
               <Typography
                 component="p"
