@@ -12,8 +12,7 @@ Based on [this project template](https://github.com/udacity/reactnd-project-myre
 
 ### Prerequisites
 
-Running this project requires [Node](https://nodejs.org/en/) to be installed.
-[Yarn](https://code.facebook.com/posts/1840075619545360) must also be installed.
+Running this project requires both [Node](https://nodejs.org/en/) and the [Yarn](https://code.facebook.com/posts/1840075619545360) package manager to be installed.
 
 
 ### Installing and Running
