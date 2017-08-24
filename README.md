@@ -41,6 +41,11 @@ A cloned project already pushed to Github can be deployed with the command `yarn
 * [MaterialUI (1.0.0 beta)](https://github.com/callemall/material-ui)
 
 
+## Miscellaneous resource links
+
+[Feature mind-map](https://www.mindmeister.com/891484248?t=TCN3DWrbpE)
+
+
 ## Authors
 
 * **Andrew R Chen** - *Initial work* - [UncleOptimus](https://github.com/uncleoptimus)
