@@ -15,9 +15,10 @@ Based on [this project template](https://github.com/udacity/reactnd-project-myre
 Running this project requires both [Node](https://nodejs.org/en/) and the [Yarn](https://code.facebook.com/posts/1840075619545360) package manager to be installed.
 
 
-### Installing and Running
+### Installing and Running *IMPORTANT*
 
-After cloning the repo, `cd` into the `/ND01-MyReads` directory and run the command `yarn` or `yarn install`
+After cloning the repo, `cd` into the `/ND01-MyReads` directory and run the command `yarn` or `yarn install`.
+(NOTE: using `npm install` leads to some likely version-related bugs, possibly something with react-scripts. In development, I used `yarn` entirely and had no issues. Thus, please use `yarn` and `yarn install` when setting up this project.)
 
 To launch the development server run the command:
 ```
