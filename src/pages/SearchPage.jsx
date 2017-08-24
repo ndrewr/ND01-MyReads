@@ -119,7 +119,9 @@ class SearchPage extends Component {
                 onChange={this.assignToShelf}
               />
             : <Typography type="display1" color="inherit">
-                nothing yet. type something?
+                {query
+                  ? 'no results. try something else?'
+                  : 'nothing yet. type something?'}
               </Typography>}
         </Grid>
       </Grid>

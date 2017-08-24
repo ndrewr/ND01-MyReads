@@ -18,10 +18,6 @@ const HomePage = ({
   shelves: ShelfMap,
   updateItem: (BookItem, string) => mixed
 }) => {
-  const changeShelf = (targetBook: BookItem, shelfType: string) => {
-    updateItem(targetBook, shelfType);
-  };
-
   return (
     <Grid container>
       <Grid item xs={12}>
@@ -35,7 +31,7 @@ const HomePage = ({
             items={books.filter(book => book.shelf === shelfKey)}
             label={shelves[shelfKey]}
             shelves={shelves}
-            onChange={changeShelf}
+            onChange={updateItem}
           />
         )}
       </Grid>
