@@ -5,16 +5,16 @@ import React from 'react';
 // MaterialUI components
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 
 import Book from './Book';
 
-const styleSheet = createStyleSheet(theme => ({
+const styleSheet = theme => ({
   root: {
     flexGrow: 1,
     margin: '3rem 0 4rem'
   }
-}));
+});
 
 const BookShelf = withStyles(
   styleSheet

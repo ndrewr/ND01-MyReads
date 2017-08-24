@@ -8,13 +8,13 @@ import * as BooksAPI from '../BooksAPI';
 import Grid from 'material-ui/Grid';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 
 import Divider from '../modules/Divider';
 import Shelf from '../modules/Shelf';
 
 // component styles
-const styleSheet = createStyleSheet(theme => ({
+const styleSheet = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap'
@@ -27,7 +27,7 @@ const styleSheet = createStyleSheet(theme => ({
       borderBottom: '1px solid lightgray'
     }
   }
-}));
+});
 
 class SearchPage extends Component {
   state = {

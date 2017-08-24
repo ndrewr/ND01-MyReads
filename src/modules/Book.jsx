@@ -10,21 +10,20 @@ import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
 import Grid from 'material-ui/Grid';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import Typography from 'material-ui/Typography';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 
 // component styles
-const styleSheet = createStyleSheet({
+const styleSheet = {
   card: {
     position: 'relative'
   },
   imageContainer: {
     textAlign: 'center',
-    backgroundColor: 'black'
-  },
-  thumbnail: {
-    height: 420,
-    width: 'auto',
-    padding: 20
+    backgroundColor: 'black',
+    height: 380,
+    padding: 20,
+    backgroundSize: 'contain',
+    backgroundPosition: 'center'
   },
   innerCover: {
     position: 'absolute',
@@ -51,7 +50,7 @@ const styleSheet = createStyleSheet({
     position: 'relative',
     zIndex: '100'
   }
-});
+};
 
 class Book extends Component {
   state = {
@@ -115,13 +114,11 @@ class Book extends Component {
       <Grid item xs={12} sm={6} md={4}>
         <div className={classes.card}>
           <Card className={classes.outerCover}>
-            <CardMedia className={classes.imageContainer}>
-              <img
-                className={classes.thumbnail}
-                src={imageLinks.thumbnail || 'images/no-cover-placeholder.jpg'}
-                alt="Book cover"
-              />
-            </CardMedia>
+            <CardMedia
+              className={classes.imageContainer}
+              image={imageLinks.thumbnail || 'images/no-cover-placeholder.jpg'}
+              alt="Book cover"
+            />
             <CardContent>
               <Typography type="headline" component="h2" noWrap title={title}>
                 {title || 'No title'}

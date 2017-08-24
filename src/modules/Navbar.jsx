@@ -9,10 +9,10 @@ import Button from 'material-ui/Button';
 import Icon from 'material-ui/Icon';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 
 // component styles
-const styleSheet = createStyleSheet(theme => ({
+const styleSheet = theme => ({
   button: {
     margin: theme.spacing.unit
   },
@@ -21,7 +21,7 @@ const styleSheet = createStyleSheet(theme => ({
     margin: '0 1rem',
     verticalAlign: 'bottom'
   }
-}));
+});
 
 const LinkButton = withStyles(styleSheet)(({ classes, path, label }) =>
   <Link to={path}>
