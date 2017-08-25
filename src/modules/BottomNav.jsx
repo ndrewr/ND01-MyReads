@@ -7,10 +7,10 @@ import BottomNavigation, {
   BottomNavigationButton
 } from 'material-ui/BottomNavigation';
 import Icon from 'material-ui/Icon';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 
 // component styles
-const styleSheet = createStyleSheet(theme => ({
+const styleSheet = theme => ({
   button: {
     margin: theme.spacing.unit
   },
@@ -19,7 +19,7 @@ const styleSheet = createStyleSheet(theme => ({
       color: 'black'
     }
   }
-}));
+});
 
 const BottomNav = () =>
   <BottomNavigation
